@@ -100,7 +100,10 @@ def move(game_state: typing.Dict) -> typing.Dict:
             is_move_safe["up"] = False
 
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
-    # opponents = game_state['board']['snakes']
+    opponents = game_state['board']['snakes']
+    print(opponents)
+
+
 
     # Are there any safe moves left?
     safe_moves = []
@@ -119,17 +122,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
     food = game_state['board']['food']
     
     for eat in food:
-        if food["x"] +1 == eat["x"] and food["y"] == eat["y"]:
-            is_move_safe["right"] = False
-
-        if food["x"]-1 == eat["x"] and food["y"] == eat["y"]:
-            is_move_safe["left"] = False
-
-        if food["x"]  == eat["x"] and food["y"] -1 == eat["y"]:
-            is_move_safe["down"] = False
-
-        if food["x"] == eat["x"] and food["y"] +1 == eat["y"]:
-            is_move_safe["up"] = False
 
 
     #(f"MOVE {game_state['turn']}: {next_move}")
