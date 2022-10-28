@@ -50,16 +50,16 @@ def move(game_state: typing.Dict) -> typing.Dict:
     my_head = game_state["you"]["body"][0]  # Coordinates of your head
     my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
 
-    if my_neck["2"] < my_head["3"]:  # Neck is left of head, don't move left
+    if my_neck["x"] < my_head["x"]:  # Neck is left of head, don't move left
         is_move_safe["left"] = False
 
-    elif my_neck["2"] > my_head["3"]:  # Neck is right of head, don't move right
+    elif my_neck["x"] > my_head["x"]:  # Neck is right of head, don't move right
         is_move_safe["right"] = False
 
-    elif my_neck["2"] < my_head["3y"]:  # Neck is below head, don't move down
+    elif my_neck["y"] < my_head["y"]:  # Neck is below head, don't move down
         is_move_safe["down"] = False
 
-    elif my_neck["2"] > my_head["3"]:  # Neck is above head, don't move up
+    elif my_neck["y"] > my_head["y"]:  # Neck is above head, don't move up
         is_move_safe["up"] = False
 
 # TODO: Step 1 - Prevent your Battlesnake from moving out of bounds
