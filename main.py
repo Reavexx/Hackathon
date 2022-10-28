@@ -101,10 +101,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
     #         is_move_safe["up"] = False
 
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
-    opponents = game_state['board']['snakes']
-    print(opponents)
-    for snake in opponents:
-        for bodypart in snake:
+    snakes = game_state['board']['snakes']
+    for snake in snakes:
+        for bodypart in snake ['body']:
             if my_head["x"] +1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
                 is_move_safe["right"] = False
 
