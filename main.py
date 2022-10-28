@@ -103,7 +103,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
     snakes = game_state['board']['snakes']
     for snake in snakes:
-        for bodypart in snake ['body']:
+        for bodypart in snake s['body']:
             if my_head["x"] +1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
                 is_move_safe["right"] = False
 
@@ -115,9 +115,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
             if my_head["x"] == bodypart["x"] and my_head["y"] +1 == bodypart["y"]: 
                 is_move_safe["up"] = False
-
-
-
 
 
     # Are there any safe moves left?
@@ -135,16 +132,16 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
-    
-    # for eat in food:
+    print(food)
 
 
-    #(f"MOVE {game_state['turn']}: {next_move}")
-    return {"move": next_move}
+
+    # (f"MOVE {game_state['turn']}: {next_move}")
+    # return {"move": next_move}
 
 
 # Start server when `python main.py` is run
-if __name__ == "__main__":
-    from server import run_server
+    if __name__ == "__main__":
+        from server import run_server
 
     run_server({"info": info, "start": start, "move": move, "end": end})
