@@ -78,14 +78,19 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     if my_head["y"] == board_height:  # Bound is above head, don't move up
         is_move_safe["up"] = False
-
+        
 
 
     # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
     my_body = game_state['you']['body']
+    print("body", my_body)
+
+
+    
+
 
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
-    opponents = game_state['board']['snakes']
+    # opponents = game_state['board']['snakes']
 
     # Are there any safe moves left?
     safe_moves = []
@@ -98,13 +103,13 @@ def move(game_state: typing.Dict) -> typing.Dict:
         return {"move": "down"}
 
     # Choose a random move from the safe ones
-    # next_move = random.choice(safe_moves)
+    next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    # food = game_state['board']['food']
+    food = game_state['board']['food']
 
     #(f"MOVE {game_state['turn']}: {next_move}")
-    #return {"move": next_move}
+    return {"move": next_move}
 
 
 # Start server when `python main.py` is run
