@@ -84,24 +84,39 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
 
     # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
-    my_body = game_state['you']['body']
+    # my_body = game_state['you']['body']
     
-    for bodypart in my_body:
-        if my_head["x"] +1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
-            is_move_safe["right"] = False
+    # for bodypart in my_body:
+    #     if my_head["x"] +1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
+    #         is_move_safe["right"] = False
 
-        if my_head["x"] -1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
-            is_move_safe["left"] = False
+    #     if my_head["x"] -1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
+    #         is_move_safe["left"] = False
 
-        if my_head["x"] == bodypart["x"] and my_head["y"] -1 == bodypart["y"]: 
-            is_move_safe["down"] = False
+    #     if my_head["x"] == bodypart["x"] and my_head["y"] -1 == bodypart["y"]: 
+    #         is_move_safe["down"] = False
 
-        if my_head["x"] == bodypart["x"] and my_head["y"] +1 == bodypart["y"]: 
-            is_move_safe["up"] = False
+    #     if my_head["x"] == bodypart["x"] and my_head["y"] +1 == bodypart["y"]: 
+    #         is_move_safe["up"] = False
 
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
     opponents = game_state['board']['snakes']
     print(opponents)
+    for snake in opponents:
+        for bodypart in snake:
+            if my_head["x"] +1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
+                is_move_safe["right"] = False
+
+            if my_head["x"] -1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
+                is_move_safe["left"] = False
+
+            if my_head["x"] == bodypart["x"] and my_head["y"] -1 == bodypart["y"]: 
+                is_move_safe["down"] = False
+
+            if my_head["x"] == bodypart["x"] and my_head["y"] +1 == bodypart["y"]: 
+                is_move_safe["up"] = False
+
+
 
 
 
