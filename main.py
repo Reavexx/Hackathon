@@ -134,8 +134,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     food = game_state['board']['food']
     print(food)
 
-    for food in food
-        tempdi
+    #for food in food
 
 
 
