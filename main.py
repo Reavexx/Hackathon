@@ -86,7 +86,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     my_body = game_state['you']['body']
     
     for my_body in range (0, 11):
-        if next_move == my_body:
+        if next_move == my_body in range (0,11):
             is_move_safe["down"] = False
 
  
