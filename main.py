@@ -12,6 +12,7 @@
 
 # from multiprocessing.reduction import duplicate
 import random
+from re import I, X
 import typing
 
 
@@ -131,32 +132,32 @@ def move(game_state: typing.Dict) -> typing.Dict:
     next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    food = game_state['board']['food']
-    nearestfood = []
-    distancetofood = 99
-    
-    for fooditem in food:
-        tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
-        if tempdistancetofood < distancetofood:
-            distancetofood = tempdistancetofood
-            nearestfood = fooditem
-
-    if my_head["x"] > nearestfood["x"]and safe_moves["left"]:
-            next_move = "left"
-    elif my_head["x"] < nearestfood["x"] and safe_moves["right"]:
-            next_move = "right"
-    elif my_head["y"] < nearestfood["y"] and safe_moves["up"]:
-            next_move = "up"
-    elif my_head["y"] < nearestfood["y"] and safe_moves["down"]:
-            next_move = "down"
-    else:
-        next_move = random.choice(safe_moves)
-
-
+    # food = game_state['board']['food']
+    # nearestfood = []
+    # distancetofood = 99
+    # for fooditem in food:
+    #     tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
+    #     if tempdistancetofood < distancetofood:
+    #         distancetofood = tempdistancetofood
+    #         nearestfood = fooditem
+    # if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
+    #     next_move = "left"
+    # elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
+    #     next_move = "right"
+    # elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
+    #     next_move = "up"
+    # elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
+    #     next_move = "down"
+    # else:
+    #     next_move = random.choice(safe_moves)
 
     # (f"MOVE {game_state['turn']}: {next_move}")
     # return {"move": next_move}
 
+# step 5 Avoiding Moves from opponent
+    for snake in snakes:
+        for head in snake['head']:
+            print['head']
 
 # Start server when `python main.py` is run
 if __name__ == "__main__":
