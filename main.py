@@ -145,14 +145,30 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = random.choice(safe_moves)
 
     # TODO: Step 5 - Avoid Opponents next move
-    # next_move = []
+    op_next_move = []
+    for op in snakes[1:]:
+        Op_head = op['head']
+        print(Op_head)
+        op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
+        op_next_move_right = [Op_head["x"] + 1, Op_head["y"]]
+        op_next_move_down = [Op_head["x"], Op_head["y"] - 1]
+        op_next_move_up = [Op_head["x"], Op_head["y"] + 1]
+        op_next_move.append(op_next_move_left)
+        op_next_move.append(op_next_move_right)
+        op_next_move.append(op_next_move_down)
+        op_next_move.append(op_next_move_up)
 
-    # for snake in snakes:
+    for Op_move in op_next_move:
+        if Op_move == next_move_left:
+            is_move_safe["left"] = False
+        if Op_move == next_move_right:
+            is_move_safe["right"] = False
+        if Op_move == next_move_down:
+            is_move_safe["down"] = False
+        if Op_move == next_move_up:
+            is_move_safe["up"] = False
+
    
-
-                
-
-
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
