@@ -147,7 +147,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # TODO: Step 5 - Avoid Opponents next move
     for snake in snakes:
         for head in snake['head']:
-            print(head)
+            Bptemp = [Bodypart["x"], Bodypart["y"]]
+            if next_move == Bptemp:  # Body is left of head, don't move left
+                is_move_safe["left"] = False
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
