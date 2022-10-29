@@ -163,12 +163,16 @@ def move(game_state: typing.Dict) -> typing.Dict:
             nearestfood = fooditem
     if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
         next_move = "left"
+        print("left food!!")
     elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
         next_move = "right"
+        print("right food!!")
     elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
         next_move = "up"
+        print("up food!!")
     elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
         next_move = "down"
+        print("down food!!")
     else:
         next_move = random.choice(safe_moves)
 
