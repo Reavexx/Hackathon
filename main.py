@@ -48,26 +48,35 @@ def end(game_state: typing.Dict):
 def move(game_state: typing.Dict) -> typing.Dict:
 
     is_move_safe = {"up": True, "down": True, "left": True, "right": True}
-    print("----------------")
 
     # We've included code to prevent your Battlesnake from moving backwards
     my_head = game_state["you"]["body"][0]  # Coordinates of your head
     my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
 
+    next_move_left = [my_head["x"] - 1, my_head["y"]]
+    next_move_right = [my_head["x"] + 1, my_head["y"]]
+    next_move_down = [my_head["x"], my_head["y"] - 1]
+    next_move_up = [my_head["x"], my_head["y"] + 1]
+
+    op_next_move_left = [my_head["x"] - 1, my_head["y"]]
+    op_next_move_right = [my_head["x"] + 1, my_head["y"]]
+    op_next_move_down = [my_head["x"], my_head["y"] - 1]
+    op_next_move_up = [my_head["x"], my_head["y"] + 1]
+
+
     if my_neck["x"] < my_head["x"]:  # Neck is left of head, don't move left
         is_move_safe["left"] = False
 
-    elif my_neck["x"] > my_head["x"]:  # Neck is right of head, don't move right
+    if my_neck["x"] > my_head["x"]:  # Neck is right of head, don't move right
         is_move_safe["right"] = False
 
-    elif my_neck["y"] < my_head["y"]:  # Neck is below head, don't move down
+    if my_neck["y"] < my_head["y"]:  # Neck is below head, don't move down
         is_move_safe["down"] = False
 
-    elif my_neck["y"] > my_head["y"]:  # Neck is above head, don't move up
+    if my_neck["y"] > my_head["y"]:  # Neck is above head, don't move up
         is_move_safe["up"] = False
 
-# TODO: Step 1 - Prevent your Battlesnake from moving out of bounds
-
+    # TODO: Step 1 - Prevent your Battlesnake from moving out of bounds
     board_width = game_state['board']['width'] - 1
     board_height = game_state['board']['height'] - 1
 
@@ -82,41 +91,25 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     if my_head["y"] == board_height:  # Bound is above head, don't move up
         is_move_safe["up"] = False
-        
 
-
-    #TODO: Step 2 - Prevent your Battlesnake from colliding with itself
-    my_body = game_state['you']['body']
-    
-    for bodypart in my_body:
-        if my_head["x"] +1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
-            is_move_safe["right"] = False
-
-        if my_head["x"] -1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
-            is_move_safe["left"] = False
-
-        if my_head["x"] == bodypart["x"] and my_head["y"] -1 == bodypart["y"]: 
-            is_move_safe["down"] = False
-
-        if my_head["x"] == bodypart["x"] and my_head["y"] +1 == bodypart["y"]: 
-            is_move_safe["up"] = False
-
+    # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
     snakes = game_state['board']['snakes']
+    
     for snake in snakes:
-        for bodypart in snake ['body']:
-            if my_head["x"] +1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
-                is_move_safe["right"] = False
-
-            if my_head["x"] -1 == bodypart["x"] and my_head["y"] == bodypart["y"]: 
+        for Bodypart in snake['body']:
+            Bptemp = [Bodypart["x"], Bodypart["y"]]
+            if next_move_left == Bptemp:  # Body is left of head, don't move left
                 is_move_safe["left"] = False
-
-            if my_head["x"] == bodypart["x"] and my_head["y"] -1 == bodypart["y"]: 
+            
+            if next_move_right == Bptemp:  # Body is right of head, don't move right
+                is_move_safe["right"] = False
+    
+            if next_move_down == Bptemp:  # Body is below head, don't move down
                 is_move_safe["down"] = False
-
-            if my_head["x"] == bodypart["x"] and my_head["y"] +1 == bodypart["y"]: 
+    
+            if next_move_up == Bptemp:  # Body is above head, don't move up
                 is_move_safe["up"] = False
-
 
     # Are there any safe moves left?
     safe_moves = []
@@ -129,35 +122,36 @@ def move(game_state: typing.Dict) -> typing.Dict:
         return {"move": "down"}
 
     # Choose a random move from the safe ones
-    next_move = random.choice(safe_moves)
+    # next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    # food = game_state['board']['food']
-    # nearestfood = []
-    # distancetofood = 99
-    # for fooditem in food:
-    #     tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
-    #     if tempdistancetofood < distancetofood:
-    #         distancetofood = tempdistancetofood
-    #         nearestfood = fooditem
-    # if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
-    #     next_move = "left"
-    # elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
-    #     next_move = "right"
-    # elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
-    #     next_move = "up"
-    # elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
-    #     next_move = "down"
-    # else:
-    #     next_move = random.choice(safe_moves)
+    food = game_state['board']['food']
+    nearestfood = []
+    distancetofood = 99
+    for fooditem in food:
+        tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
+        if tempdistancetofood < distancetofood:
+            distancetofood = tempdistancetofood
+            nearestfood = fooditem
+    if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
+        next_move = "left"
+    elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
+        next_move = "right"
+    elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
+        next_move = "up"
+    elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
+        next_move = "down"
+    else:
+        next_move = random.choice(safe_moves)
 
-    # (f"MOVE {game_state['turn']}: {next_move}")
-    # return {"move": next_move}
-
-# step 5 Avoiding Moves from opponent
+    # TODO: Step 5 - Avoid Opponents next move
     for snake in snakes:
         for head in snake['head']:
-            print['head']
+            print(head)
+
+    # Movement
+    print(f"MOVE {game_state['turn']}: {next_move}")
+    return {"move": next_move}
 
 # Start server when `python main.py` is run
 if __name__ == "__main__":
