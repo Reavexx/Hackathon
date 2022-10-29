@@ -168,7 +168,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
         if Op_move == next_move_up:
             is_move_safe["up"] = False
 
-   
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
