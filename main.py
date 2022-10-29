@@ -187,17 +187,17 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = random.choice(safe_moves)
 
 # TODO: Step 6 - Avoiding Food until we need it
-    food = game_state["board"]["food"]
-    if game_state["health"] > 25:
-        for collectfood in food:
-            if (my_head["x"] +1 and my_head["y"]):
-                is_move_safe["right"] = False
-            if (my_head["x"] -1 and my_head["y"]):
-                is_move_safe["left"] = False
-            if (my_head["x"]  and my_head["y"]+ 1):
-                is_move_safe["right"] = False
-            if (my_head["x"] and my_head["y"]-1):
-                is_move_safe["down"] = False
+    # food = game_state["board"]["food"]
+    # if game_state["health"] > 25:
+    #     for collectfood in food:
+    #         if (my_head["x"] +1 and my_head["y"]):
+    #             is_move_safe["right"] = False
+    #         if (my_head["x"] -1 and my_head["y"]):
+    #             is_move_safe["left"] = False
+    #         if (my_head["x"]  and my_head["y"]+ 1):
+    #             is_move_safe["right"] = False
+    #         if (my_head["x"] and my_head["y"]-1):
+    #             is_move_safe["down"] = False
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
