@@ -141,13 +141,17 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for Op_move in op_next_move:
         if Op_move == next_move_left:
             is_move_safe["left"] = False
+            print("left Snake!!")
         if Op_move == next_move_right:
             is_move_safe["right"] = False
+            print("right Snake!!")
         if Op_move == next_move_down:
             is_move_safe["down"] = False
+            print("down Snake!!")
         if Op_move == next_move_up:
             is_move_safe["up"] = False
-            
+            print("up Snake!!")
+
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
     nearestfood = []
