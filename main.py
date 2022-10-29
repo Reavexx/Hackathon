@@ -111,18 +111,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if next_move_up == Bptemp:  # Body is above head, don't move up
                 is_move_safe["up"] = False
 
-    # Are there any safe moves left?
-    safe_moves = []
-    for move, isSafe in is_move_safe.items():
-        if isSafe:
-            safe_moves.append(move)
-
-    if len(safe_moves) == 0:
-        print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
-        return {"move": "down"}
-
-    # Choose a random move from the safe ones
-    next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
@@ -149,10 +137,10 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for op in snakes[1:]:
         Op_head = op['head']
         print(Op_head)
-        op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
-        op_next_move_right = [Op_head["x"] + 1, Op_head["y"]]
-        op_next_move_down = [Op_head["x"], Op_head["y"] - 1]
-        op_next_move_up = [Op_head["x"], Op_head["y"] + 1]
+        op_next_move_left = Op_head["x"] - 1, Op_head["y"]
+        op_next_move_right = Op_head["x"] + 1, Op_head["y"]
+        op_next_move_down = Op_head["x"], Op_head["y"] - 1
+        op_next_move_up = Op_head["x"], Op_head["y"] + 1
         op_next_move.append(op_next_move_left)
         op_next_move.append(op_next_move_right)
         op_next_move.append(op_next_move_down)
@@ -167,6 +155,21 @@ def move(game_state: typing.Dict) -> typing.Dict:
             is_move_safe["down"] = False
         if Op_move == next_move_up:
             is_move_safe["up"] = False
+
+    # Are there any safe moves left?
+    safe_moves = []
+    for move, isSafe in is_move_safe.items():
+        if isSafe:
+            safe_moves.append(move)
+
+    if len(safe_moves) == 0:
+        print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
+        return {"move": "down"}
+
+    # Choose a random move from the safe ones
+    next_move = random.choice(safe_moves)
+
+
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
