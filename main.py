@@ -122,7 +122,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         return {"move": "down"}
 
     # Choose a random move from the safe ones
-    # next_move = random.choice(safe_moves)
+    next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
@@ -145,17 +145,13 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = random.choice(safe_moves)
 
     # TODO: Step 5 - Avoid Opponents next move
-    for snake in snakes:
-        for head in snake['head']:
-            Bptemp = [Bodypart["x"], Bodypart["y"]]
-            if next_move == "up":  
-                is_move_safe["down"] = False
-            if next_move == "down":  
-                is_move_safe["up"] = False
-            if next_move == "right":  
-                is_move_safe["left"] = False
-            if next_move == "left":  
-                is_move_safe["right"] = False
+    # next_move = []
+
+    # for snake in snakes:
+   
+
+                
+
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
