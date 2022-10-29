@@ -198,16 +198,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 is_move_safe["right"] = False
             if (my_head["x"] and my_head["y"]-1):
                 is_move_safe["down"] = False
-    elif game_state["health"] < 25:
-        for collectfood in food:
-            if (my_head["x"] +1 and my_head["y"]):
-                is_move_safe["right"] = True
-            if (my_head["x"] -1 and my_head["y"]):
-                is_move_safe["left"] = True
-            if (my_head["x"]  and my_head["y"]+ 1):
-                is_move_safe["right"] = True
-            if (my_head["x"] and my_head["y"]-1):
-                is_move_safe["down"] = True
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
