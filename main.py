@@ -25,7 +25,7 @@ def info() -> typing.Dict:
     return {
         "apiversion": "1",
         "author": "Dines",  # TODO: Your Battlesnake Username
-        "color": "#123456",  # TODO: Choose color
+        "color": "#1C86EE",  # TODO: Choose color
         "head": "earmuffs",  # TODO: Choose head
         "tail": "weight",  # TODO: Choose tail
     }
@@ -63,6 +63,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
     op_next_move_down = [my_head["x"], my_head["y"] - 1]
     op_next_move_up = [my_head["x"], my_head["y"] + 1]
 
+    # my_id = game_state["you"]["id"]
+    # for myId in my_id:
+    #     for id in my_id['id']:
+    #         if my_id :  # Body is left of head, don't move left
+    #             is_move_safe["left"] = False
 
     if my_neck["x"] < my_head["x"]:  # Neck is left of head, don't move left
         is_move_safe["left"] = False
@@ -126,7 +131,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
 # TODO: Step 5 - Avoid Opponents next move
     op_next_move = []
-    for op in snakes[1:]:
+    for op in snakes[:2]:
         Op_head = op['head']
         print(Op_head)
         op_next_move_left = Op_head["x"] - 1, Op_head["y"]
