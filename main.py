@@ -12,7 +12,6 @@
 
 # from multiprocessing.reduction import duplicate
 import random
-from re import I, X
 import typing
 
 
