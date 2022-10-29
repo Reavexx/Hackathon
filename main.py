@@ -129,7 +129,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # Choose a random move from the safe ones
     next_move = random.choice(safe_moves)
 
-# TODO: Step 5 - Avoid Opponents next move
+# TODO: Step 4 - Avoid Opponents next move
     op_next_move = []
     for op in snakes:
         if op["id"] != game_state["you"]["id"]:
@@ -162,7 +162,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             is_move_safe["up"] = False
             print("up Snake!!")
 
-    # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
+    # TODO: Step 5 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
     nearestfood = []
     distancetofood = 99
@@ -186,7 +186,28 @@ def move(game_state: typing.Dict) -> typing.Dict:
     else:
         next_move = random.choice(safe_moves)
 
-    
+# TODO: Step 6 - Avoiding Food until we need it
+    food = game_state["board"]["food"]
+    if game_state["health"] > 25:
+        for collectfood in food:
+            if (my_head["x"] +1 and my_head["y"]):
+                is_move_safe["right"] = False
+            if (my_head["x"] -1 and my_head["y"]):
+                is_move_safe["left"] = False
+            if (my_head["x"]  and my_head["y"]+ 1):
+                is_move_safe["right"] = False
+            if (my_head["x"] and my_head["y"]-1):
+                is_move_safe["down"] = False
+    elif game_state["health"] < 25:
+        for collectfood in food:
+            if (my_head["x"] +1 and my_head["y"]):
+                is_move_safe["right"] = True
+            if (my_head["x"] -1 and my_head["y"]):
+                is_move_safe["left"] = True
+            if (my_head["x"]  and my_head["y"]+ 1):
+                is_move_safe["right"] = True
+            if (my_head["x"] and my_head["y"]-1):
+                is_move_safe["down"] = True
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
